@@ -128,8 +128,8 @@ class _SecondPageState extends State<SecondPage> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     try {
-      hkController = HkController("hk");
-      playerController = HkPlayerController(hkController);
+      hkController = HkController("hk"); // 必须要有名字，如果有多个摄像头或硬盘录像机就要定义多个
+      playerController = HkPlayerController(hkController); // 有多个播放器就要定义多个
 
       await hkController.init();
       await hkController.login(
