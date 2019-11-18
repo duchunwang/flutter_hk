@@ -3,7 +3,7 @@ import UIKit
 
 public class SwiftFlutterHkPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "flutter_hk", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "flutter_hk/controller", binaryMessenger: registrar.messenger())
     let instance = SwiftFlutterHkPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }

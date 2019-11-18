@@ -147,3 +147,13 @@ import 'package:flutter_hk/hk_player_controller.dart';
     );
   }
 ```
+
+在不用的时候一定要记得销毁控制器
+```
+  @override
+  void dispose() {
+    this.hkController.logout();
+    this.hkController.dispose();
+    super.dispose();
+  }
+```

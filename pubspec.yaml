@@ -1,8 +1,8 @@
 name: flutter_hk
-description: A new flutter plugin project.
+description: 海康8000协议播放插件.
 version: 0.0.1
-author:
-homepage:
+author: TrevorDu <4963636@qq.com>
+homepage: https://github.com/duchunwang/flutter_hk
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
