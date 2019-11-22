@@ -12,7 +12,7 @@ class HkController {
 
   Future init() async {
     if (!isInit) {
-      await _ctrl_channel.invokeMapMethod("createController", {
+      await _ctrl_channel.invokeMethod("createController", {
         "name": name,
       });
       _channel = MethodChannel('flutter_hk/controller_$name');
@@ -27,13 +27,12 @@ class HkController {
   }
 
   Future<int> login(String ip, int port, String user, String psd) async {
-    var result = await _channel.invokeMapMethod("login", {
+    var iUserId = await _channel.invokeMethod("login", {
       "ip": ip,
       "port": port,
       "user": user,
       "psd": psd,
     });
-    iUserId = result[0];
     return iUserId;
   }
 
@@ -44,11 +43,11 @@ class HkController {
 
   Future logout() async {
     iUserId = -1;
-    await _channel.invokeMapMethod("logout");
+    await _channel.invokeMethod("logout");
   }
 
   void dispose() {
-    _ctrl_channel.invokeMapMethod("dispose", {
+    _ctrl_channel.invokeMethod("dispose", {
       "name": name,
     });
   }

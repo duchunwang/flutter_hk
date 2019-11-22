@@ -36,8 +36,6 @@ public class FlutterHkPlugin implements MethodCallHandler {
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-
-    Map<Object,Object> ret = new HashMap<>();
     Log.e("Controller", call.method);
     switch (call.method){
       case "getPlatformVersion":
@@ -49,13 +47,12 @@ public class FlutterHkPlugin implements MethodCallHandler {
         if(!_channels.containsKey(name)) {
           _channels.put(name, new HkController(name, this.messenger));
         }
-        ret.put(0, name);
-        result.success(ret);
+        result.success(true);
         break;
       case "dispose":
         name = call.argument("name");
         _channels.remove(name);
-        result.success(null);
+        result.success(true);
         break;
       default:
         result.notImplemented();

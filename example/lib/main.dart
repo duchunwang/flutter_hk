@@ -83,7 +83,11 @@ class FirstPage extends StatelessWidget {
                       });
                     }
                   },
-                )
+                ),
+                IconButton(icon: Icon(Icons.pages),
+                onPressed: (){
+                  HkController.platformVersion.then((v)=>print("output:" + v));
+                },)
               ],
             )));
   }

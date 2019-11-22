@@ -119,12 +119,12 @@ public class PlaySurfaceView extends SurfaceView implements PlatformView,MethodC
                 int iUserID = methodCall.argument("iUserID");
                 int ichan = methodCall.argument("iChan");
                 this.startPreview(iUserID, ichan);
-                result.success(null);
+                result.success(true);
                 break;
             case "stop":
                 Log.i(TAG, "stop");
                 this.stopPreview();
-                result.success(null);
+                result.success(true);
                 break;
             default:
                 result.notImplemented();

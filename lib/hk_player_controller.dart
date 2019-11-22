@@ -24,7 +24,7 @@ class HkPlayerController {
       Future.error("请先登录");
       return;
     }
-    var result = await _channel.invokeMapMethod(
+    await _channel.invokeMethod(
         "play", {"iUserID": this.hkController.iUserId, "iChan": iChan});
     print("playend");
     isPlaying = true;
@@ -37,9 +37,8 @@ class HkPlayerController {
   }
 
   Future stop() async {
-    var result = await _channel.invokeMapMethod("stop");
+    await _channel.invokeMethod("stop");
     isPlaying = false;
-    return result;
   }
 
   void dispose() {

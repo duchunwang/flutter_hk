@@ -14,7 +14,13 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 ## 平台
-Android, IOS
+Android, iOS
+
+For iOS you needed to add this two rows into Info.plist file (see example for details):
+```
+<key>io.flutter.embedded_views_preview</key>
+<true/>
+```
 
 ## 说明flutter_hk插件基于海康的原生SDK的二次封装，支持多路硬盘录像机的登录和多个视频窗口的播放。
 

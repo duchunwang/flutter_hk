@@ -38,7 +38,6 @@ public class HkController implements MethodChannel.MethodCallHandler {
 
     @Override
     public void onMethodCall(MethodCall call, MethodChannel.Result result) {
-        Map<Object,Object> ret;
         Log.e("ctrl1", call.method);
         switch (call.method){
             case "login":
@@ -47,19 +46,18 @@ public class HkController implements MethodChannel.MethodCallHandler {
                 String user = call.argument("user");
                 String psd = call.argument("psd");
                 try {
-                    ret = new HashMap<>();
-                    ret.put(0, this.login(ip, port, user, psd));
-                    result.success(ret);
+                    int iUserID = this.login(ip, port, user, psd));
+                    result.success(iUserID);
                 }catch (Exception err){
                     result.error("ERR", err.getMessage(), null);
                 }
                 break;
             case "logout":
                 this.logout();
-                result.success(null);
+                result.success(true);
                 break;
             case "getChans":
-                ret = this.getChans();
+                Map<Object,Object> ret = this.getChans();
                 result.success(ret);
                 break;
             default:

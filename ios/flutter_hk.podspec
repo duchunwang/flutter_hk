@@ -17,5 +17,13 @@ A new flutter plugin project.
   s.dependency 'Flutter'
 
   s.ios.deployment_target = '8.0'
+  
+  # s.vendored_libraries = 'lib/*.a'
+  # s.libraries = 'c++'
+  s.vendored_libraries = 'lib/Release-iphoneos/*.a'
+  s.frameworks = 'AudioToolbox', 'VideoToolbox', 'GLKit'
+  s.libraries = 'bz2', 'iconv', 'c++'
+  # s.ios.vendored_frameworks = 'Frameworks/frameworktest.framework'
+  # s.vendored_frameworks = 'frameworktest.framework'
 end
 
