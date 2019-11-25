@@ -55,7 +55,7 @@ class FirstPage extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(10), labelText: "请输入端口"),
-                  initialValue: "8190",
+                  initialValue: "8210",
                   onSaved: (v) => this.port = int.parse(v),
                 ),
                 TextFormField(
