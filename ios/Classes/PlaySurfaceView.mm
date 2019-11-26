@@ -84,20 +84,4 @@
     isPlaying = false;
 }
 
-//-(void)handleMethodCall:(FlutterMethodCall *)call result:(FlutterResult)result{
-//    NSLog(@"player:%@", call.method);
-//    if([@"play" isEqualToString:call.method]){
-//        NSDictionary *params = [call arguments];
-//        int iUserId = [params[@"iUserID"]intValue];
-//        int ichan = [params[@"iChan"]intValue];
-////        self.startPreview(iUserId, ichan);
-//        result(@YES);
-//    }else if([@"stop" isEqualToString:call.method]){
-//        [self stopPreview];
-//        result(@YES);
-//    }else{
-//        result(FlutterMethodNotImplemented);
-//    }
-//}
-
 @end

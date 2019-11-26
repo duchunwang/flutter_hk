@@ -49,25 +49,6 @@
     return self;
 }
 
-//- (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-//    if([@"login" isEqualToString:call.method]){
-//        NSDictionary *params = [call arguments];
-//        int port = [params[@"iUserID"]intValue];
-//        NSString ip = params[@"ip"];
-//        NSString user = params[@"user"];
-//        NSString psd = params[@"psd"];
-//        int uid = [self login:ip,port,user, psd];
-//        result(uid);
-//    }else if([@"logout" isEqualToString:call.method]){
-//        [self logout];
-//        result(@YES);
-//    }else if([@"getChans" isEqualToString:call.method]){
-//        result([self getChans]);
-//    }else{
-//        result(FlutterMethodNotImplemented);
-//    }
-//}
-
 -(int)login:(NSString *)ip port:(int)port user:(NSString *)user psd:(NSString *)psd{
     NSLog(@"Logining:%@:%d:%@:%@", ip, port, user, psd);
     NET_DVR_DEVICEINFO_V30 dinfo = {0};
