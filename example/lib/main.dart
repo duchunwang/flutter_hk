@@ -55,7 +55,7 @@ class FirstPage extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(10), labelText: "请输入端口"),
-                  initialValue: "8210",
+                  initialValue: "8000",
                   onSaved: (v) => this.port = int.parse(v),
                 ),
                 TextFormField(
@@ -67,7 +67,7 @@ class FirstPage extends StatelessWidget {
                 TextFormField(
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(10), labelText: "请输入密码"),
-                  initialValue: "zxc654321",
+                  initialValue: "admin",
                   onSaved: (v) => this.psd = v,
                 ),
                 IconButton(
