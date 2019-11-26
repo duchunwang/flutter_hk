@@ -5,3 +5,6 @@
 .pub/
 
 build/
+
+ios/lib
+android/libs

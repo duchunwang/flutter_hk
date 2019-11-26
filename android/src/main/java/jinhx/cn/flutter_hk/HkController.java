@@ -172,11 +172,8 @@ public class HkController implements MethodChannel.MethodCallHandler {
         NET_DVR_PICCFG_V30 net_dvr_piccfg_v30 = new NET_DVR_PICCFG_V30();
         Map<Object,Object> chans = new HashMap<>();
         for (int i = this.m_iStartChan; i<this.m_iStartChan+this.m_iChanNum;i++){
-            try {
-                HCNetSDK.getInstance().NET_DVR_GetDVRConfig(this.m_iLogID, HCNetSDK.NET_DVR_GET_PICCFG_V30, i, net_dvr_piccfg_v30);
+            if(HCNetSDK.getInstance().NET_DVR_GetDVRConfig(this.m_iLogID, HCNetSDK.NET_DVR_GET_PICCFG_V30, i, net_dvr_piccfg_v30)){
                 chans.put(i, new String(net_dvr_piccfg_v30.sChanName, "GBK"));
-            }catch (UnsupportedEncodingException ex){
-                continue;
             }
         }
         Log.i(TAG, "getChans is Successful!");

@@ -4,10 +4,10 @@
 //
 //  Created by 金海星 on 2019/11/20.
 //
-
+#import <Foundation/Foundation.h>
 #import "PlaySurfaceView.h"
 #import "FlutterHkPlugin.h"
-//#import "hcnetsdk.h"
+#import "hcnetsdk.h"
 
 @implementation PlaySurfaceView{
     FlutterMethodChannel *channel;
@@ -30,21 +30,23 @@
         playView.clipsToBounds = YES;
         playView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
-        channel = [FlutterMethodChannel methodChannelWithName:[NSString stringWithFormat:@"flutter_hk/player_%11d", viewId] binaryMessenger:[FlutterHkPlugin registrar].messenger];
+        NSString *chanName = [NSString stringWithFormat:@"flutter_hk/player_%lli", viewId];
+        NSLog(@"name:%@:name", chanName);
+        channel = [FlutterMethodChannel methodChannelWithName:chanName binaryMessenger:[FlutterHkPlugin registrar].messenger];
         [channel setMethodCallHandler:^(FlutterMethodCall * _Nonnull call, FlutterResult  _Nonnull result) {
             NSLog(@"player:%@", call.method);
-                if([@"play" isEqualToString:call.method]){
-                    NSDictionary *params = [call arguments];
-                    int iUserId = [params[@"iUserID"]intValue];
-                    int ichan = [params[@"iChan"]intValue];
-            //        self.startPreview(iUserId, ichan);
-                    result(@YES);
-                }else if([@"stop" isEqualToString:call.method]){
-                    [self stopPreview];
-                    result(@YES);
-                }else{
-                    result(FlutterMethodNotImplemented);
-                }
+            if([@"play" isEqualToString:call.method]){
+                NSDictionary *params = [call arguments];
+                int iUserId = [params[@"iUserID"]intValue];
+                int ichan = [params[@"iChan"]intValue];
+                [self startPreview:iUserId iChan:ichan];
+                result(@YES);
+            }else if([@"stop" isEqualToString:call.method]){
+                [self stopPreview];
+                result(@YES);
+            }else{
+                result(FlutterMethodNotImplemented);
+            }
         }];
     }
     
@@ -59,24 +61,26 @@
     [self stopPreview];
 }
 
--(void)startPreview{
+-(void)startPreview:(int)iUserID iChan:(int)iChan{
     NSLog(@"startPreview");
-//    NET_DVR_PREVIEWINFO previewInfo = {0};
-//    previewInfo.lChannel = 0;
-//    previewInfo.dwStreamType = 1;
-//    previewInfo.bBlocked = 1;
-//    previewInfo.hPlayWnd = [self getHolder];
-//
-//    m_iPreviewHandle = NET_DVR_RealPlay_V40(iUserID, &previewInfo, nil, nil);
-//    if(m_iPreviewHandle < 0){
-//        //
-//    }
+    NET_DVR_PREVIEWINFO previewInfo = {0};
+    previewInfo.lChannel = iChan;
+    previewInfo.dwStreamType = 1;
+    previewInfo.bBlocked = 1;
+    previewInfo.hPlayWnd = (__bridge HWND)playView;
+
+    m_iPreviewHandle = NET_DVR_RealPlay_V40(iUserID, &previewInfo, nil, nil);
+    if(m_iPreviewHandle < 0){
+        NSLog(@"NET_DVR_RealPlay_V40 is failed!Err:[@i]", NET_DVR_GetLastError());
+        return;
+    }
     isPlaying = true;
+    NSLog(@"NET_DVR_RealPlay_V40 is success");
 }
 
 -(void)stopPreview{
     NSLog(@"stopPreview");
-//    NET_DEV_StopRealPlay(m_iPreviewHandle);
+    NET_DVR_StopRealPlay(m_iPreviewHandle);
     isPlaying = false;
 }
 
