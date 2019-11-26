@@ -46,7 +46,7 @@ public class HkController implements MethodChannel.MethodCallHandler {
                 String user = call.argument("user");
                 String psd = call.argument("psd");
                 try {
-                    int iUserID = this.login(ip, port, user, psd));
+                    int iUserID = this.login(ip, port, user, psd);
                     result.success(iUserID);
                 }catch (Exception err){
                     result.error("ERR", err.getMessage(), null);

@@ -100,6 +100,7 @@ public class PlaySurfaceView extends SurfaceView implements PlatformView,MethodC
         if (m_iPreviewHandle < 0)
         {
             Log.e(TAG, "NET_DVR_RealPlay is failed!Err:" + HCNetSDK.getInstance().NET_DVR_GetLastError());
+            return;
         }
         this.isPlaying = true;
         Log.i(TAG, "NET_DVR_RealPlay is success");

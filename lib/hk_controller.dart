@@ -27,7 +27,7 @@ class HkController {
   }
 
   Future<int> login(String ip, int port, String user, String psd) async {
-    var iUserId = await _channel.invokeMethod("login", {
+    iUserId = await _channel.invokeMethod("login", {
       "ip": ip,
       "port": port,
       "user": user,
