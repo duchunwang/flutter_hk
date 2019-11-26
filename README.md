@@ -23,6 +23,10 @@ For iOS you needed to add this two rows into Info.plist file (see example for de
 ```
 
 ## 说明flutter_hk插件基于海康的原生SDK的二次封装，支持多路硬盘录像机的登录和多个视频窗口的播放。
+特别注意：新建项目时只能用objc, 不能用swift不然会报错
+```
+flutter create -i objc projName
+```
 
 ## 依赖
 在pubspec.yaml里加入
