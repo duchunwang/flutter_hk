@@ -17,6 +17,7 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 /** FlutterHkPlugin */
 public class FlutterHkPlugin implements MethodCallHandler {
   static BinaryMessenger messenger;
+  static Boolean _isInit = false;
   Map<String, HkController> _channels = new HashMap<>();
   /** Plugin registration. */
   public static void registerWith(Registrar registrar) {
@@ -25,8 +26,6 @@ public class FlutterHkPlugin implements MethodCallHandler {
     channel.setMethodCallHandler(new FlutterHkPlugin());
 
     registrar.platformViewRegistry().registerViewFactory("flutter_hk/player", new PlaySurfaceViewFactory(messenger));
-
-    HCNetSDK.getInstance().NET_DVR_Init();
   }
 
   @Override
@@ -43,6 +42,10 @@ public class FlutterHkPlugin implements MethodCallHandler {
         result.success("Android " + android.os.Build.VERSION.RELEASE);
         break;
       case "createController":
+        if(!_isInit){
+          HCNetSDK.getInstance().NET_DVR_Init();
+          _isInit = true;
+        }
         String name = call.argument("name");
         if(!_channels.containsKey(name)) {
           _channels.put(name, new HkController(name, this.messenger));

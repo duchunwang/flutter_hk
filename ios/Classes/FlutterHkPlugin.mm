@@ -4,6 +4,7 @@
 #import "hcnetsdk.h"
 
 static NSObject<FlutterPluginRegistrar>* _registrar;
+static BOOL _isInit;
 
 @implementation FlutterHkPlugin{
     NSMutableDictionary *channels;
@@ -26,12 +27,7 @@ static NSObject<FlutterPluginRegistrar>* _registrar;
     [registrar registerViewFactory:[[PlaySurfaceViewFactory alloc]init] withId:@"flutter_hk/player"];
     
 //    NSLog(@"add: %d", add(1, 2));
-     BOOL bRet = NET_DVR_Init();
-     if (!bRet)
-     {
-         NSLog(@"NET_DVR_Init failed");
-     }
-     NSLog(@"NET_DVR_Init ok!");
+     _isInit = NO;
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
@@ -39,6 +35,16 @@ static NSObject<FlutterPluginRegistrar>* _registrar;
     if([@"getPlatformVersion" isEqualToString:call.method]){
         result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
     }else if([@"createController" isEqualToString:call.method]){
+        if(_isInit == NO){
+            BOOL bRet = NET_DVR_Init();
+            if (!bRet)
+            {
+                NSLog(@"NET_DVR_Init failed");
+                result(@NO);
+            }
+            NSLog(@"NET_DVR_Init ok!");
+            _isInit = YES;
+        }
         NSDictionary *params = [call arguments];
         NSString *name = params[@"name"];
         NSObject *value = [channels objectForKey:name];
