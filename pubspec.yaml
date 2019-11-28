@@ -1,6 +1,6 @@
 name: flutter_hk
 description: Flutter plugin to play hikvision camera with 8000 protocol. It used hikvision native library, *.so for java and *.a for ios.
-version: 1.0.1
+version: 1.0.2
 author: TrevorDu <duchunwang@gmail.com>
 homepage: https://github.com/duchunwang/flutter_hk
 
